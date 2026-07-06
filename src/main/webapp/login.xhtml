@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+
+<h:head>
+    <title>Employee Login</title>
+
+    <style>
+
+        body{
+            margin:0;
+            padding:0;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#d4d0c8;
+            background-image:repeating-linear-gradient(
+            -45deg,
+            rgba(255,255,255,.18) 0px,
+            rgba(255,255,255,.18) 1px,
+            transparent 1px,
+            transparent 12px);
+            font-family:Tahoma,Arial,sans-serif;
+            font-size:11px;
+        }
+
+        .window{
+            width:430px;
+            background:#d4d0c8;
+
+            border-top:2px solid white;
+            border-left:2px solid white;
+            border-right:2px solid #404040;
+            border-bottom:2px solid #404040;
+
+            box-shadow:7px 7px rgba(0,0,0,.35);
+        }
+
+        .title{
+            height:28px;
+            background:linear-gradient(#6d8ed8,#2c5fa8);
+            color:white;
+            font-weight:bold;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:0 8px;
+            font-size:12px;
+        }
+
+        .close{
+            width:18px;
+            height:18px;
+            background:#d4d0c8;
+            border:1px solid #666;
+            text-align:center;
+            line-height:18px;
+            font-weight:bold;
+        }
+
+        .content{
+            padding:20px;
+        }
+
+        .avatar{
+            width:70px;
+            height:70px;
+            margin:auto;
+            border-radius:50%;
+            background:white;
+            border:2px solid gray;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:34px;
+            margin-bottom:20px;
+        }
+
+        label{
+            display:block;
+            margin-top:10px;
+            margin-bottom:4px;
+            font-weight:bold;
+        }
+
+        .input{
+            width:100%;
+            height:26px;
+            box-sizing:border-box;
+            padding-left:6px;
+
+            border-top:2px solid #7f9db9;
+            border-left:2px solid #7f9db9;
+            border-right:1px solid white;
+            border-bottom:1px solid white;
+
+            font-family:Tahoma;
+            font-size:11px;
+        }
+
+        .button{
+            width:150px;
+            height:30px;
+            margin-top:20px;
+
+            background:linear-gradient(#ffffff,#d4d0c8);
+
+            border-top:1px solid white;
+            border-left:1px solid white;
+            border-right:1px solid #404040;
+            border-bottom:1px solid #404040;
+
+            cursor:pointer;
+            font-family:Tahoma;
+            font-size:11px;
+        }
+
+        .button:hover{
+            background:linear-gradient(#fff9cc,#ffe18a);
+        }
+
+        .button:active{
+            border-top:1px solid #404040;
+            border-left:1px solid #404040;
+            border-right:1px solid white;
+            border-bottom:1px solid white;
+        }
+
+        .footer{
+            text-align:center;
+            margin-top:20px;
+        }
+
+        a{
+            color:#003399;
+            text-decoration:none;
+        }
+.message{
+    color:#cc0000;
+    font-size:11px;
+    font-weight:bold;
+    display:block;
+    margin-top:4px;
+}
+    </style>
+
+</h:head>
+
+<h:body>
+
+<h:form>
+
+<div class="window">
+
+    <div class="title">
+        <span>Employee Login</span>
+        <div class="close">X</div>
+    </div>
+
+    <div class="content">
+
+        <div class="avatar">
+            🔐
+        </div>
+
+        <label>Employee ID</label>
+
+        <h:inputText
+            id="employeeId"
+            styleClass="input"
+            value="#{loginBean.employeeId}"
+          required="true"
+    requiredMessage="Employee ID is required."/>
+   <h:message
+    for="employeeId"
+    styleClass="message"
+    showSummary="true"
+    showDetail="false"/>
+        <label>Password</label>
+
+        <h:inputSecret
+            id="password"
+            styleClass="input"
+            value="#{loginBean.password}"
+         required="true"
+    requiredMessage="Password is required."/>
+<h:message
+    for="password"
+    styleClass="message"
+    showSummary="true"
+    showDetail="false"/>
+        <div style="text-align:center;">
+
+            <h:commandButton
+                value="Sign In"
+                styleClass="button"
+                action="#{loginBean.login}"/>
+                <h:outputText
+    value="#{loginBean.message}"
+    style="color:red;font-weight:bold;display:block;text-align:center;margin-top:10px;"/>
+    
+    <h:panelGroup rendered="#{not empty flash.successMessage}">
+    <h:messages globalOnly="true"
+            layout="table"
+            infoStyle="color:green;font-weight:bold;"
+            errorStyle="color:red;font-weight:bold;" />
+
+    <div style="
+        background:#e8f8ec;
+        border:1px solid #4CAF50;
+        color:#2e7d32;
+        padding:10px;
+        margin-bottom:15px;
+        border-radius:4px;
+        font-weight:bold;
+        text-align:center;">
+
+        ✅ #{flash.successMessage}
+
+    </div>
+
+</h:panelGroup>
+
+        </div>
+
+        <div class="footer">
+
+            Don't have an account?
+
+            <br/><br/>
+
+          <h:button outcome="register" value="Create New Account"/> 
+        </div>
+
+    </div>
+
+</div>
+
+</h:form>
+
+</h:body>
+
+</html>
